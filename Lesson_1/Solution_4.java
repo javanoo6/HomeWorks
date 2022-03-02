@@ -25,7 +25,7 @@ public class Solution_4 {
         }
 
         public BigInteger calculation(Integer n) {
-            if (n <= 2) {
+            if (n <= 1) {
                 return BigInteger.valueOf(n);
             } else if (cachedFibonacci.containsKey(n)) {
                 return cachedFibonacci.get(n);
