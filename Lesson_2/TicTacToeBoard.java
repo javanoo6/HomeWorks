@@ -6,7 +6,6 @@ public class TicTacToeBoard {
     private final String[] board;
 
 
-
     public TicTacToeBoard() {
         this.board = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9"};
 
@@ -49,13 +48,11 @@ public class TicTacToeBoard {
 
             if (line.equals("XXX")) {
                 return true;
-            }
-
-
-            else if (line.equals("OOO")) {
+            } else if (line.equals("OOO")) {
                 return true;
             }
-        }return false;
+        }
+        return false;
     }
 
 

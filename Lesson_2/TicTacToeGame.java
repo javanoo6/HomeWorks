@@ -1,17 +1,12 @@
 package Lesson_2;
 
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class TicTacToeGame {
 
 
     private TicTacToeBoard gameBoard;
-
+    private LeaderBoard leaderBoard = new LeaderBoard();
 
     public TicTacToeGame() {
         this.gameBoard = new TicTacToeBoard();
@@ -26,7 +21,7 @@ public class TicTacToeGame {
     }
 
 
-    public void twoPlayer() throws IOException {
+    public void twoPlayer() {
         Scanner sc = new Scanner(System.in);
 
         Player playerOne = new Player("X");
@@ -35,6 +30,7 @@ public class TicTacToeGame {
         Player[] players = new Player[]{playerOne, playerTwo};
 
         System.out.print("Введите имя первого участника: ");
+
         playerOne.setName(sc.next());
         System.out.print("Введите имя второго участника: ");
         playerTwo.setName(sc.next());
@@ -49,18 +45,14 @@ public class TicTacToeGame {
                 this.getGameBoard().drawBoard();
 
                 if (this.getGameBoard().checkIfGameOver()) {
-                    FileWriter fileWriter = new FileWriter("/Users/user_nick/IdeaProjects/Y_LabHomeworks/src/Lesson_2/LeaderBoard",true);
-                    BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-                    bufferedWriter.newLine();
-                    bufferedWriter.write(player.getName() + " - Победитель");
-                    bufferedWriter.flush();
-
-                    System.out.println(player.getName() + " Победитель");
+                    leaderBoard.LeaderBoardIfWinner(player.getName());
+                    System.out.println(player.getName() + "-Победитель");
                     gameOver = true;
 
                     break;
                 } else if (this.getGameBoard().checkifGameDraw()) {
-                    System.out.println("Победила дружба");
+                    leaderBoard.LeaderBoardIfDraw(playerOne.getName(), playerTwo.getName());
+                    System.out.println("Между " + playerOne.getName() + " и " + playerTwo.getName() + "-Победила дружба");
                     gameOver = true;
                     break;
                 }
@@ -71,7 +63,7 @@ public class TicTacToeGame {
     }
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
 
         System.out.print("""
                 ########################
@@ -84,38 +76,30 @@ public class TicTacToeGame {
         info.getGameBoard().drawBoard();
 
         TicTacToeGame ticTacToeGame = new TicTacToeGame();
-
+        LeaderBoard leaderBoard = new LeaderBoard();
 
         Scanner myScan = new Scanner(System.in);
 
         while (true) {
             System.out.println();
-            System.out.println("Хотите сыграть? y/n (y=да/n=нет)"+" Для просмотра записи побед нажмите l");
+            System.out.println("Хотите сыграть? y/n (y=да/n=нет)" + " Для просмотра записи побед нажмите l");
             ticTacToeGame.setGameBoard(new TicTacToeBoard(new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9"}));
             String response = myScan.next();
             if (response.equalsIgnoreCase("n")) {
                 System.out.println("Всего доброго!");
                 break;
-            }
-            else if (response.equalsIgnoreCase("y")) {
+            } else if (response.equalsIgnoreCase("y")) {
                 ticTacToeGame.twoPlayer();
-            }else if(response.equalsIgnoreCase("l")){
-                 FileReader fileReader = new FileReader("/Users/user_nick/IdeaProjects/Y_LabHomeworks/src/Lesson_2/LeaderBoard");
-                char[] buf = new char[256];
-                int c;
-                while((c = fileReader.read(buf))>0){
-
-                    if(c < 256){
-                        buf = Arrays.copyOf(buf, c);
-                    }
-                    System.out.print(buf);
-                }
-            }else
+            } else if (response.equalsIgnoreCase("l")) {
+                leaderBoard.LeaderBoardShowResults();
+            } else
                 System.out.println("Программа вас не так поняла, " +
                         "пожалуйста введите на английской раскладке буквы y или n");
 
         }
 
     }
+
+
 }
 
