@@ -1,9 +1,13 @@
 package Lesson_2;
 
+import Lesson_2.StaxParser.StaxWriter;
+
+import javax.xml.stream.XMLStreamException;
 import java.util.Scanner;
 
 public class TicTacToeGame {
 
+    public StaxWriter configFile = new StaxWriter();
 
     private TicTacToeBoard gameBoard;
     private LeaderBoard leaderBoard = new LeaderBoard();
@@ -11,6 +15,7 @@ public class TicTacToeGame {
     public TicTacToeGame() {
         this.gameBoard = new TicTacToeBoard();
     }
+
 
     public TicTacToeBoard getGameBoard() {
         return this.gameBoard;
@@ -21,19 +26,31 @@ public class TicTacToeGame {
     }
 
 
-    public void twoPlayer() {
+    public void twoPlayer() throws XMLStreamException {
+
         Scanner sc = new Scanner(System.in);
 
-        Player playerOne = new Player("X");
-        Player playerTwo = new Player("O");
+        Player playerOne = new Player("X", 1);
+
+        Player playerTwo = new Player("O", 2);
 
         Player[] players = new Player[]{playerOne, playerTwo};
 
-        System.out.print("Введите имя первого участника: ");
 
+        configFile.setFile((configFile));
+
+        System.out.print("Введите имя первого участника: ");
         playerOne.setName(sc.next());
         System.out.print("Введите имя второго участника: ");
         playerTwo.setName(sc.next());
+
+
+        try {
+            configFile.GamePlayNode(playerOne, playerTwo);
+            configFile.createGameNode();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         this.getGameBoard().drawBoard();
         boolean gameOver = false;
@@ -41,29 +58,33 @@ public class TicTacToeGame {
             for (Player player : players) {
                 System.out.println(player.getName() + ", Ваш ход " + "(вы играете " + player.getSymbol() + "-ми)");
 
-                player.makeMove(this.getGameBoard());
+                player.makeMove(this.getGameBoard(), player, configFile);
+
                 this.getGameBoard().drawBoard();
 
                 if (this.getGameBoard().checkIfGameOver()) {
                     leaderBoard.LeaderBoardIfWinner(player.getName());
                     System.out.println(player.getName() + "-Победитель");
+                    configFile.closeAllNodes(player);
                     gameOver = true;
 
                     break;
                 } else if (this.getGameBoard().checkifGameDraw()) {
                     leaderBoard.LeaderBoardIfDraw(playerOne.getName(), playerTwo.getName());
                     System.out.println("Между " + playerOne.getName() + " и " + playerTwo.getName() + "-Победила дружба");
+                    configFile.closeAllNodes2();
                     gameOver = true;
                     break;
                 }
-//
             }
+
         } while (!gameOver);
+
 
     }
 
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws XMLStreamException {
 
         System.out.print("""
                 ########################
