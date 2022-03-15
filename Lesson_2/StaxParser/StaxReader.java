@@ -19,7 +19,7 @@ public class StaxReader {
     static File file;
 
 
-    public static void main(String[] args) throws XMLStreamException, IOException {
+    public static void main(String[] args) throws  IOException {
         System.out.println("Введите абсолютный путь к файлу записанной игры");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         fileDirectory = br.readLine();
@@ -37,7 +37,7 @@ public class StaxReader {
     static Player player = new Player();
     static TicTacToeBoard ttb = new TicTacToeBoard();
 
-    public static void staxFileReader(File file) throws XMLStreamException {
+    public static void staxFileReader(File file) throws FileNotFoundException {
         XMLInputFactory factory = XMLInputFactory.newInstance();
         try {
             XMLEventReader reader = factory.createXMLEventReader(new FileInputStream(file));
@@ -45,52 +45,41 @@ public class StaxReader {
                 XMLEvent event = reader.nextEvent();
                 if (event.isStartElement()) {
                     StartElement startElement = event.asStartElement();
-                    switch (startElement.getName().getLocalPart()) {
-                        case "Player" -> {
-                            Attribute attribute = startElement.getAttributeByName(new QName("id"));
-                            player.setId(Integer.parseInt(attribute.getValue()));
-                            attribute = startElement.getAttributeByName(new QName("name"));
-                            player.setName(attribute.getValue());
-                            attribute = startElement.getAttributeByName(new QName("symbol"));
-                            player.setSymbol(attribute.getValue());
-                            System.out.println("ID участника: "+player.getId() +","+" Имя участника: "+ player.getName()+"," + " Символ, которым ходит участник: "+player.getSymbol());
-                        }
-                        case "Step" -> {
-                            Attribute attribute = startElement.getAttributeByName(new QName("num"));
 
-                            Attribute attribute2 = startElement.getAttributeByName(new QName("playerId"));
-                            event = reader.nextEvent();
-                            int stringStep = Integer.parseInt(event.asCharacters().getData());
-                            ttb.placePiece(attribute, attribute2, stringStep);
-                        }
-                        case "GameResult" -> {
-                            var test = reader.getElementText();
-                            if (test.equalsIgnoreCase("Draw!")) {
-                                System.out.println(test);
-                                break;
-                            }
-                            Attribute attribute = startElement.getAttributeByName(new QName("id"));
-                            player.setId(Integer.parseInt(attribute.getValue()));
-                            attribute = startElement.getAttributeByName(new QName("name"));
-                            player.setName(attribute.getValue());
-                            attribute = startElement.getAttributeByName(new QName("symbol"));
-                            player.setSymbol(attribute.getValue());
-
-                            var test2 = ("ID победителя: "+player.getId() + "Имя победителя: "+player.getName() + "Символ, которым ходит участник"+player.getSymbol());
-                            System.out.println(test2);
-                        }
+                    if (startElement.getName().getLocalPart().equals("Player")) {
+                        Attribute attribute = startElement.getAttributeByName(new QName("id"));
+                        player.setId(Integer.parseInt(attribute.getValue()));
+                        attribute = startElement.getAttributeByName(new QName("name"));
+                        player.setName(attribute.getValue());
+                        attribute = startElement.getAttributeByName(new QName("symbol"));
+                        player.setSymbol(attribute.getValue());
+                        System.out.println("ID участника: " + player.getId() + "," + " Имя участника: " + player.getName() + "," + " Символ, которым ходит участник: " + player.getSymbol());
                     }
+                    if (startElement.getName().getLocalPart().equals("Step")) {
+                        Attribute attribute = startElement.getAttributeByName(new QName("num"));
+
+                        Attribute attribute2 = startElement.getAttributeByName(new QName("playerId"));
+                        event = reader.nextEvent();
+                        int stringStep = Integer.parseInt(event.asCharacters().getData());
+                        ttb.placePiece(attribute, attribute2, stringStep);
+                    }
+                    if (startElement.getName().getLocalPart().equals("GameResult")) {
+
+                        System.out.println("результат игры: "+reader.next());
+
+                    }
+
                 }
             }
-        } catch (
-                FileNotFoundException e) {
-            e.printStackTrace();
+        } catch (XMLStreamException ex) {
+            ex.printStackTrace();
         }
+
 
 
     }
 
 
-
 }
+
 

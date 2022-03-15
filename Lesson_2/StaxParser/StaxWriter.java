@@ -8,6 +8,7 @@ import javax.xml.stream.XMLEventWriter;
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.*;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.time.LocalTime;
@@ -22,6 +23,7 @@ public class StaxWriter {
 
     private String configFile;
 
+    private static final String FILEPATH = "./src/main/java/Lesson_2/xmlFiles/";
 
     public void setFile(StaxWriter configFile) {
         this.configFile = gameplay();
@@ -34,7 +36,7 @@ public class StaxWriter {
 
         XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
         eventWriter = outputFactory
-                .createXMLEventWriter(new FileOutputStream(configFile));
+                .createXMLEventWriter(new FileOutputStream(FILEPATH+ configFile));
         XMLEventFactory eventFactory = XMLEventFactory.newInstance();
         StartDocument startDocument = eventFactory.createStartDocument();
         eventWriter.add(startDocument);
@@ -54,16 +56,32 @@ public class StaxWriter {
     public void createPlayerNode(Player player) throws XMLStreamException {
         XMLEventFactory eventFactory = XMLEventFactory.newInstance();
         StartElement sElement = eventFactory.createStartElement("", "", "Player");
-        eventWriter.add(tabtab);
+        eventWriter.add(tab);
         eventWriter.add(sElement);
+//        eventWriter.add(end);
+
         eventWriter.add(eventFactory.createAttribute("id", String.valueOf(player.getId())));
         eventWriter.add(eventFactory.createAttribute("name", player.getName()));
         eventWriter.add(eventFactory.createAttribute("symbol", String.valueOf(player.getSymbol())));
-        EndElement eElement = eventFactory.createEndElement("", "", "Player");
+        EndElement eElement2 = eventFactory.createEndElement("", "", "Player");
+        eventWriter.add(eElement2);
+        eventWriter.add(end);
+
+    }
+    public void createStepNode(Player player, int moveLocation, int counter) throws XMLStreamException {
+        XMLEventFactory eventFactory = XMLEventFactory.newInstance();
+        StartElement sElement = eventFactory.createStartElement("", "", "Step");
+        eventWriter.add(tab);
+        eventWriter.add(tab);
+        eventWriter.add(sElement);
+        eventWriter.add(eventFactory.createAttribute("num", String.valueOf(counter)));
+        eventWriter.add(eventFactory.createAttribute("playerId", String.valueOf(player.getId())));
+        Characters characters = eventFactory.createCharacters(String.valueOf(moveLocation));
+        eventWriter.add(characters);
+        EndElement eElement = eventFactory.createEndElement("", "", "Step");
         eventWriter.add(eElement);
         eventWriter.add(end);
     }
-
     public void createGameNode() throws XMLStreamException {
         XMLEventFactory eventFactory = XMLEventFactory.newInstance();
         StartElement sElement = eventFactory.createStartElement("", "", "Game");
@@ -85,9 +103,25 @@ public class StaxWriter {
         eventWriter.add(tab);
         eventWriter.add(sElement);
 
+        StartElement sElement3 = eventFactory.createStartElement("", "", "Player");
+//        eventWriter.add(tab);
+        eventWriter.add(sElement3);
         eventWriter.add(eventFactory.createAttribute("id", String.valueOf(player.getId())));
         eventWriter.add(eventFactory.createAttribute("name", player.getName()));
         eventWriter.add(eventFactory.createAttribute("symbol", String.valueOf(player.getSymbol())));
+        EndElement eElement2 = eventFactory.createEndElement("", "", "Player");
+        eventWriter.add(eElement2);
+//        eventWriter.add(end);
+
+//        StartElement sElement2 = eventFactory.createStartElement("", "", "Player");
+////        eventWriter.add(tabtab);
+//        eventWriter.add(sElement2);
+//
+//
+//        eventWriter.add(eventFactory.createAttribute("id", String.valueOf(player.getId())));
+//        eventWriter.add(eventFactory.createAttribute("name", player.getName()));
+//        eventWriter.add(eventFactory.createAttribute("symbol", String.valueOf(player.getSymbol())));
+
         EndElement eElement = eventFactory.createEndElement("", "", "GameResult");
         eventWriter.add(eElement);
         eventWriter.add(end);
@@ -99,20 +133,7 @@ public class StaxWriter {
 
     }
 
-    public void createStepNode(Player player, int moveLocation, int counter) throws XMLStreamException {
-        XMLEventFactory eventFactory = XMLEventFactory.newInstance();
-        StartElement sElement = eventFactory.createStartElement("", "", "Step");
-        eventWriter.add(tab);
-        eventWriter.add(tab);
-        eventWriter.add(sElement);
-        eventWriter.add(eventFactory.createAttribute("num", String.valueOf(counter)));
-        eventWriter.add(eventFactory.createAttribute("playerId", String.valueOf(player.getId())));
-        Characters characters = eventFactory.createCharacters(String.valueOf(moveLocation));
-        eventWriter.add(characters);
-        EndElement eElement = eventFactory.createEndElement("", "", "Step");
-        eventWriter.add(eElement);
-        eventWriter.add(end);
-    }
+
 
     public void closeAllNodes2() throws XMLStreamException {
         eventWriter.add(tab);

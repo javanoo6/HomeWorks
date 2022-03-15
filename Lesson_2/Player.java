@@ -2,6 +2,7 @@ package Lesson_2;
 
 import Lesson_2.StaxParser.StaxWriter;
 
+import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 import java.util.Scanner;
 
@@ -57,5 +58,9 @@ public class Player {
             System.out.println("Not a valid location, " + this.getName() + ", pick another. ");
 
         }
+    }
+
+    public void setId(QName id) {
+
     }
 }

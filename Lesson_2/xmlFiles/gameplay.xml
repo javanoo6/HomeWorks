@@ -2,24 +2,6 @@
 <Gameplay>
     <Player id="1" name="Igor" symbol="X"/>
     <Player id="2" name="Anna" symbol="O"/>
-    <!--
-       Может быть разная реализация ввода координаты выбранной ячейки, например
-      |1|2|3|
-      |4|5|6|
-      |7|8|9|
-      НО что важна, что шаг записывается значение этой кооринаты
-      <Step num="1" playerId="1">5</Step>
-      у некоторых ребят это может быть "22" или "2 2", где это координаты по xy,
-      и как результат при воспроизведении этого файла,
-      отобразится следующая матрица:
-      |1|2|3|
-      |4|x|6|
-      |7|8|9|
-  Варианты результата игры записываются следующим образом:
-  <GameResult>Draw!</GameResult>
-  <GameResult><Player id="1" name="Igor" symbol="x"/></GameResult>
-  <GameResult><Player id="2" name="Anna" symbol="o"/></GameResult>
-    -->
     <Game>
         <Step num="1" playerId="1">5</Step>
         <Step num="2" playerId="2">3</Step>
@@ -33,3 +15,22 @@
     </Game>
     <GameResult><Player id="1" name="Igor" symbol="X"/></GameResult>
 </Gameplay>
+<!--    <GameResult id="1" name="123we" symbol="X"></GameResult>-->
+        <!--
+           Может быть разная реализация ввода координаты выбранной ячейки, например
+          |1|2|3|
+          |4|5|6|
+          |7|8|9|
+          НО что важна, что шаг записывается значение этой кооринаты
+          <Step num="1" playerId="1">5</Step>
+          у некоторых ребят это может быть "22" или "2 2", где это координаты по xy,
+          и как результат при воспроизведении этого файла,
+          отобразится следующая матрица:
+          |1|2|3|
+          |4|x|6|
+          |7|8|9|
+      Варианты результата игры записываются следующим образом:
+      <GameResult>Draw!</GameResult>
+      <GameResult><Player id="1" name="Igor" symbol="x"/></GameResult>
+      <GameResult><Player id="2" name="Anna" symbol="o"/></GameResult>
+        -->

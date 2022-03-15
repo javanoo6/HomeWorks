@@ -3,7 +3,7 @@ package Lesson_2;
 import java.io.*;
 
 public class LeaderBoard {
-    private static final String FILENAME = "/Users/user_nick/IdeaProjects/Y_LabHomeworks/src/main/java/Lesson_2/LeaderBoard";
+    private static final String FILENAME = "./src/main/java/Lesson_2/LeaderBoard";
 
     public void LeaderBoardIfWinner(String name) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(FILENAME, true))) {
