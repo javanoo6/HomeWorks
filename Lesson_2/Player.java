@@ -1,25 +1,54 @@
 package Lesson_2;
 
-import Lesson_2.StaxParser.StaxWriter;
-
-import javax.xml.namespace.QName;
-import javax.xml.stream.XMLStreamException;
-import java.util.Scanner;
-
+import java.util.*;
 
 public class Player {
+
+    public int getCounter() {
+        return counter;
+    }
+
+    private int counter;
     private Scanner sc;
+    private int id;
+    private String name;
+    private String symbol;
+    private int pos;
+
+
+    public Player(int id, int num, String name, int counter) {
+        this.id = id;
+        this.name = name;
+        this.pos = num;
+        this.counter = counter;
+
+    }
+    List<Player> listOfPlayerSteps = new ArrayList<>();
+
+    public void setListOfPlayerSteps(int id, int boardPos, String name, int counter) {
+        listOfPlayerSteps.add(new Player(id, boardPos, name, counter));
+    }
+
+    public int getSize() {
+        return listOfPlayerSteps.size();
+    }
+
+    public Player getPlayerStep(int index) {
+        return listOfPlayerSteps.get(index);
+    }
+
+    public void setWinner(String name, int id, String symbol) {
+        this.name = name;
+        this.id = id;
+        this.symbol = symbol;
+    }
 
     public int getId() {
         return id;
     }
-
-
-    private int id;
-    private String name;
-    private String symbol;
-
-
+    public int getPos() {
+        return pos;
+    }
     public void setId(int id) {
         this.id = id;
     }
@@ -51,16 +80,13 @@ public class Player {
         this.name = name;
     }
 
-    public void makeMove(TicTacToeBoard board, Player player, StaxWriter configFile) throws XMLStreamException {
+    public void makeMove(TicTacToeBoard board){
         int moveLocation = Integer.parseInt(sc.next());
 
-        if (!board.placePiece(this.getSymbol(), moveLocation, player, configFile)) {
-            System.out.println("Not a valid location, " + this.getName() + ", pick another. ");
+        if (!board.placePiece(this.getSymbol(), moveLocation)) {
+            System.out.println("Сюда нельзя походить, " + this.getName() + ", выберите другую ячейку ");
 
         }
     }
 
-    public void setId(QName id) {
-
-    }
 }

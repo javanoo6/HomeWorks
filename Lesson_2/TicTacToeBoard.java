@@ -1,8 +1,5 @@
 package Lesson_2;
 
-import Lesson_2.StaxParser.StaxWriter;
-
-import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Attribute;
 import java.util.Arrays;
 
@@ -10,6 +7,15 @@ public class TicTacToeBoard {
 
     private final String[] board;
     int counter;
+    int posComf;
+
+    public int getCounter() {
+        return counter;
+    }
+
+    public int getPosComf() {
+        return posComf;
+    }
 
     public TicTacToeBoard() {
         this.board = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9"};
@@ -27,17 +33,18 @@ public class TicTacToeBoard {
         return this.board;
     }
 
-    public boolean placePiece(String xo, int pos, Player player, StaxWriter configFile) throws XMLStreamException {
+    public boolean placePiece(String xo, int pos) {
         if (pos < 0 || pos > 9) return false;
 
         else if (board[pos - 1].contains("X") || board[pos - 1].contains("0")) return false;
 
         else this.getBoard()[pos - 1] = xo;
-        counter++;
-        configFile.createStepNode(player, pos, counter);
+        posComf = pos;
+        this.counter++;
         return true;
 
     }
+
 
     public boolean checkIfGameOver() {
         for (int a = 0; a < 8; a++) {
@@ -89,12 +96,24 @@ public class TicTacToeBoard {
 
     public void placePiece(Attribute attribute, Attribute attribute2, int stringStep) {
         String xo;
-        if(attribute2.toString().contains("1")){
-            xo="X";
-        }else xo="0";
+        if (attribute2.toString().contains("1")) {
+            xo = "X";
+        } else xo = "0";
         this.getBoard()[stringStep - 1] = xo;
         drawBoard();
-        System.out.println(attribute+"это сделанный ход участником: " + attribute2.getValue() );
+        System.out.println("Ход " + attribute + " - ходит игрок с ID:" + attribute2.getValue() + " (" + xo + " -> в " + stringStep + "кл.)");
+    }
+
+
+    public void placePiece(Integer playerId, Integer num, String xy) {
+        String xo;
+        if (playerId.equals(1)) {
+            xo = "X";
+        } else xo = "0";
+        int pos = Integer.parseInt(xy);
+        this.getBoard()[pos - 1] = xo;
+        drawBoard();
+        System.out.println("Ход №: " + num + " - ходит игрок с ID: " + playerId + " (" + xo + " -> в " + pos + "кл.)");
     }
 }
 

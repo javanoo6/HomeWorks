@@ -8,7 +8,7 @@ public class LeaderBoard {
     public void LeaderBoardIfWinner(String name) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(FILENAME, true))) {
             bufferedWriter.newLine();
-            bufferedWriter.write(name + "-Победитель");
+            bufferedWriter.write(name + " -Победитель");
             bufferedWriter.flush();
 
         } catch (IOException e) {
@@ -20,7 +20,7 @@ public class LeaderBoard {
 
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(FILENAME, true))) {
             bufferedWriter.newLine();
-            bufferedWriter.write("между" + player1 + " и " + player2 + "-Победила дружба");
+            bufferedWriter.write("между" + player1 + " и " + player2 + " -Победила дружба");
             bufferedWriter.flush();
 
         } catch (IOException e) {
