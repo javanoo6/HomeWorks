@@ -1,4 +1,4 @@
-package Lesson_2;
+package ru.javanoo6.Lesson_2;
 
 import java.io.*;
 

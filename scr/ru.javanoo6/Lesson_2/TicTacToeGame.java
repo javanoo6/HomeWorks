@@ -1,8 +1,8 @@
-package Lesson_2;
+package ru.javanoo6.Lesson_2;
 
-import Lesson_2.DOMParer.DOMWriter;
-import Lesson_2.JSONParser.JSONWriter;
-import Lesson_2.StaxParser.StaxWriter;
+import ru.javanoo6.Lesson_2.DOMParer.DOMWriter;
+import ru.javanoo6.Lesson_2.JSONParser.JSONWriter;
+import ru.javanoo6.Lesson_2.StaxParser.StaxWriter;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLStreamException;

@@ -1,8 +1,8 @@
-package Lesson_2.DOMParer;
+package ru.javanoo6.Lesson_2.DOMParer;
 
-import Lesson_2.Tests.FIlePathManager;
-import Lesson_2.GameToFileInterface;
-import Lesson_2.Player;
+import ru.javanoo6.Lesson_2.Tests.FIlePathManager;
+import ru.javanoo6.Lesson_2.GameToFileInterface;
+import ru.javanoo6.Lesson_2.Player;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Text;

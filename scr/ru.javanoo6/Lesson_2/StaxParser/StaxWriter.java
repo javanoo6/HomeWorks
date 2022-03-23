@@ -1,8 +1,8 @@
-package Lesson_2.StaxParser;
+package ru.javanoo6.Lesson_2.StaxParser;
 
-import Lesson_2.Tests.FIlePathManager;
-import Lesson_2.GameToFileInterface;
-import Lesson_2.Player;
+import ru.javanoo6.Lesson_2.Tests.FIlePathManager;
+import ru.javanoo6.Lesson_2.GameToFileInterface;
+import ru.javanoo6.Lesson_2.Player;
 
 import javax.xml.stream.XMLEventFactory;
 import javax.xml.stream.XMLEventWriter;

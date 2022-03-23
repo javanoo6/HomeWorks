@@ -1,7 +1,8 @@
-package Lesson_2.DOMParer;
+package ru.javanoo6.Lesson_2.StaxParser;
 
-import Lesson_2.Player;
-import Lesson_2.TicTacToeBoard;
+import ru.javanoo6.Lesson_2.Player;
+import ru.javanoo6.Lesson_2.TicTacToeBoard;
+
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
@@ -11,13 +12,14 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 import java.io.*;
 
-public class DOMReader {
+public class StaxReader {
+
 
     static String fileDirectory;
     static File file;
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws  IOException {
         System.out.println("Введите абсолютный путь к файлу записанной игры");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         fileDirectory = br.readLine();
@@ -28,14 +30,14 @@ public class DOMReader {
             fileDirectory = br.readLine();
             file = new File(fileDirectory);
         }
-        domFileReader(file);
+        staxFileReader(file);
         br.close();
     }
 
     static Player player = new Player();
     static TicTacToeBoard ttb = new TicTacToeBoard();
 
-    public static void domFileReader(File file) throws FileNotFoundException {
+    public static void staxFileReader(File file) throws FileNotFoundException {
         XMLInputFactory factory = XMLInputFactory.newInstance();
         try {
             XMLEventReader reader = factory.createXMLEventReader(new FileInputStream(file));
@@ -63,7 +65,7 @@ public class DOMReader {
                     }
                     if (startElement.getName().getLocalPart().equals("GameResult")) {
 
-                        System.out.println("результат игры: " + reader.next());
+                        System.out.println("результат игры: "+reader.next());
 
                     }
 
@@ -72,5 +74,12 @@ public class DOMReader {
         } catch (XMLStreamException ex) {
             ex.printStackTrace();
         }
+
+
+
     }
+
+
 }
+
+

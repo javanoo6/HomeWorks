@@ -1,8 +1,8 @@
-package Lesson_2.JSONParser;
+package ru.javanoo6.Lesson_2.JSONParser;
 
-import Lesson_2.Tests.FIlePathManager;
-import Lesson_2.GameToFileInterface;
-import Lesson_2.Player;
+import ru.javanoo6.Lesson_2.Tests.FIlePathManager;
+import ru.javanoo6.Lesson_2.GameToFileInterface;
+import ru.javanoo6.Lesson_2.Player;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.FileWriter;

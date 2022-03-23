@@ -1,4 +1,4 @@
-package Lesson_2.Tests;
+package ru.javanoo6.Lesson_2.Tests;
 
 import org.json.simple.parser.ParseException;
 

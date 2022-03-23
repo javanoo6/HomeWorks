@@ -1,6 +1,6 @@
-package Lesson_2.Tests;
+package ru.javanoo6.Lesson_2.Tests;
 
-import Lesson_2.TicTacToeBoard;
+import ru.javanoo6.Lesson_2.TicTacToeBoard;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
