@@ -1,4 +1,4 @@
-package Lesson_1;
+package ru.javanoo6.Lesson_1;
 
 import java.io.BufferedReader;
 import java.io.IOException;
