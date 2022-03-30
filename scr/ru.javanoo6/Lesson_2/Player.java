@@ -4,6 +4,13 @@ import java.util.*;
 
 public class Player {
 
+
+//    public Player(String id, String name, String symbol) {
+//        this.idForWeb=id;
+//        this.name=name;
+//        this.symbol=symbol;
+//    }
+
     public int getCounter() {
         return counter;
     }
@@ -15,6 +22,16 @@ public class Player {
     private String symbol;
     private int pos;
 
+    public String getIdForWeb() {
+        return idForWeb;
+    }
+
+    public void setIdForWeb(String idForWeb) {
+        this.idForWeb = idForWeb;
+    }
+
+    private String idForWeb;
+
 
     public Player(int id, int num, String name, int counter) {
         this.id = id;
@@ -23,7 +40,7 @@ public class Player {
         this.counter = counter;
 
     }
-    List<Player> listOfPlayerSteps = new ArrayList<>();
+   public List<Player> listOfPlayerSteps = new ArrayList<>();
 
     public void setListOfPlayerSteps(int id, int boardPos, String name, int counter) {
         listOfPlayerSteps.add(new Player(id, boardPos, name, counter));

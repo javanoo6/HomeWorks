@@ -18,8 +18,8 @@ public class TicTacToeGame {
     public StaxWriter StaxWriter = new StaxWriter();
     public GameToFileInterface gameToFileInterface;
 
-    private TicTacToeBoard gameBoard;
-    private LeaderBoard leaderBoard = new LeaderBoard();
+    public TicTacToeBoard gameBoard;
+    public LeaderBoard leaderBoard = new LeaderBoard();
 
     public TicTacToeGame() {
         this.gameBoard = new TicTacToeBoard();
@@ -64,7 +64,6 @@ public class TicTacToeGame {
                 this.getGameBoard().drawBoard();
 
                 playerTest.setListOfPlayerSteps(player.getId(), gameBoard.getPosComf(), player.getName(), gameBoard.getCounter());
-//                playerTest.setListOfPlayerSteps(player.getId(), gameBoard.getPosComf(), player.getName(), getGameBoard().counter);
 
                 if (this.getGameBoard().checkIfGameOver()) {
                     leaderBoard.LeaderBoardIfWinner(player.getName());

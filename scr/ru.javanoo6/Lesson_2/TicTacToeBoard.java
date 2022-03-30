@@ -6,8 +6,8 @@ import java.util.Arrays;
 public class TicTacToeBoard {
 
     private final String[] board;
-    int counter;
-    int posComf;
+    public int counter;
+    public int posComf;
 
     public int getCounter() {
         return counter;
